@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Password Strength Checker</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>BruteShield</h1>
+      <h2><i>Password Strength Checker</i></h2>
+
+      <form method="POST">
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter Your Password"
+          required
+        />
+        <div class="button-group">
+          <button type="submit">Check</button>
+          <button
+            type="submit"
+            name="clear"
+            value="clear"
+          >
+            Clear
+          </button>
+        </div>
+      </form>
+
+      {% if hashed %}
+      <div class="results">
+        <p>
+          <strong>Hashed Password:</strong>
+          <span class="hashed">{{ hashed }}</span>
+        </p>
+        <p><strong>Original Password:</strong> {{ decoded }}</p>
+        <div class="progress-bar">
+          <div
+            class="fill"
+            style="width: {{ strength }}%; background-color: {{ 'red' if strength < 50 else 'orange' if strength < 70 else 'lime' }};"
+          >
+            {{ strength }}%
+          </div>
+        </div>
+      </div>
+
+      {% endif %}
+
+      <div class="guidelines">
+        <h2>Password Guidelines</h2>
+        <ul>
+          <li>At least 8 characters (xxxxxxxx)</li>
+          <li>Include both uppercase and lowercase letters (e.g. A B c d)</li>
+          <li>Include numbers (e.g. 1 2 3)</li>
+          <li>Include special characters (e.g., !, @, #)</li>
+        </ul>
+      </div>
+      <div class="tagline">
+        <h3>
+          <b><i>"Check strength. Store only the strong." 🔐</i></b>
+        </h3>
+      </div>
+    </div>
+  </body>
+</html>

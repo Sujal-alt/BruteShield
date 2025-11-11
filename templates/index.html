@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BruteShield - Password Strength Checker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>BruteShield</h1>
+        <h2>Password Strength Checker</h2>
+
+        <form method="POST">
+            <input type="password" name="password" placeholder="Enter Your Password" class="password-input" required>
+            <div class="button-group">
+                <button type="submit" name="check" class="btn btn-check">Check</button>
+                <button type="submit" name="clear" class="btn btn-clear">Clear</button>
+            </div>
+        </form>
+
+        {% if hashed %}
+        <div class="results-box">
+            <div class="result-row">
+                <label>Hashed Password:</label>
+                <input type="text" readonly value="{{ hashed }}" class="hashed-output">
+            </div>
+
+            <div class="result-row">
+                <label>Original Password:</label>
+                <input type="text" readonly value="{{ decoded }}" class="original-output">
+            </div>
+
+            <div class="strength-meter">
+                <p>{{ strength }}%</p>
+                <div class="bar-container">
+                    <div class="bar" style="width: {{ strength }}%;"></div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="guidelines">
+            <h3>Password Guidelines</h3>
+            <ul>
+                <li>At least 8 characters</li>
+                <li>Include both uppercase and lowercase letters (e.g. A, a)</li>
+                <li>Include numbers (e.g. 1, 2, 3)</li>
+                <li>Include special characters (e.g. !, @, #)</li>
+            </ul>
+            <p class="moto">"Check strength. Store only the strong."</p>
+        </div>
+    </div>
+</body>
+</html>
